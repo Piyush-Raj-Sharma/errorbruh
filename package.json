@@ -35,16 +35,16 @@
       "properties": {
         "errorSounds.terminalSoundChoice": {
           "type": "string",
-          "enum": ["faaah.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
+          "enum": ["fahhhhhhhhhhhhhh.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
           "enumDescriptions": ["Faaah the tredny one", "amitabbachaaan", "ias ki taiyaari chor do", "Mute Terminal Sound"],
-          "default": "faaah.mp3",
+          "default": "fahhhhhhhhhhhhhh.mp3",
           "description": "Choose the sound to play in the terminal when an error occurs."
         },
         "errorSounds.ideSoundChoice": {
           "type": "string",
-          "enum": ["faaah.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
+          "enum": ["fahhhhhhhhhhhhhh.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
           "enumDescriptions": ["Faaah the tredny one", "amitabbachaaan", "ias ki taiyaari chor do", "Mute Debug Sound"],
-          "default": "faaah.mp3",
+          "default": "fahhhhhhhhhhhhhh.mp3",
           "description": "Choose the sound to play in the debug console when an error occurs."
         }
       }
