@@ -4,21 +4,15 @@
   "description": "ErrorBruh makes your coding experience more emotional and hilarious by playing meme-worthy sounds whenever your code fails, crashes, or throws errors. Turn boring error messages into entertaining moments with iconic reactions like the viral FAAH sound.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.93.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "errorbruh.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -34,5 +28,26 @@
   },
   "dependencies": {
     "play-sound": "^1.1.6"
+  },
+  "contributes":{
+    "configuration":{
+      "title": "Error Sounds",
+      "properties": {
+        "errorSounds.terminalSoundChoice": {
+          "type": "string",
+          "enum": ["faaah.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
+          "enumDescriptions": ["Faaah the tredny one", "amitabbachaaan", "ias ki taiyaari chor do", "Mute Terminal Sound"],
+          "default": "faaah.mp3",
+          "description": "Choose the sound to play in the terminal when an error occurs."
+        },
+        "errorSounds.ideSoundChoice": {
+          "type": "string",
+          "enum": ["faaah.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
+          "enumDescriptions": ["Faaah the tredny one", "amitabbachaaan", "ias ki taiyaari chor do", "Mute Debug Sound"],
+          "default": "faaah.mp3",
+          "description": "Choose the sound to play in the debug console when an error occurs."
+        }
+      }
+    }
   }
 }
