@@ -1,15 +1,25 @@
-const assert = require('assert');
+const vscode = require("vscode");
+const path = require("path");
+const player = require("play-sound")({});
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-const vscode = require('vscode');
-// const myExtension = require('../extension');
+/**
+ * @param {vscode.ExtensionContext} context
+ */
+function activate(context) {
+  console.log('Congratulations, your extension "errorbruh" is now active!');
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+  // Function to play sound based on user settings
+  function playSound(audioFileName = "fahhhhhhhhhhhhhh.mp3") {
+    if (audioFileName === "none" || !audioFileName) return; 
+	// Don't play any sound if "none" is selected or if the value is falsy
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
+	//builds the path to the audio file based on the extension's directory and the selected audio file name
+	const soundPath = path.join(context.extensionPath, "sounds", audioFileName);
+
+	player.play(soundPath, function(err){
+		if(err) console.error("Could not play sound", err);
 	});
-});
+  }
+
+
+}
