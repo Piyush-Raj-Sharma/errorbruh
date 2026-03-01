@@ -1,36 +1,99 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-const vscode = require('vscode');
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const vscode = require("vscode");
+const path = require("path");
+// const player = require("play-sound")({});
+const sound = require("sound-play");
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+  console.log("Error Sounds extension is now active!");
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "errorbruh" is now active!');
+  // Helper function to play the specific sound file
+  function playSound(audioFileName) {
+	if (!audioFileName || audioFileName === "none") return;
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('errorbruh.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+	// Build the absolute path to the sound file in your 'sounds' folder
+	const soundPath = path.join(context.extensionPath, "sounds", audioFileName);
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from ErrorBruh!');
-	});
+	console.log("TRYING TO PLAY SOUND AT PATH:", soundPath);
 
-	context.subscriptions.push(disposable);
+	// player.play(soundPath, function (err) {
+	//   if (err) console.error("Could not play sound:", err);
+	// });
+
+	// Use the new sound-play library
+		sound.play(soundPath).catch((err) => {
+			console.error("Could not play sound:", err);
+		});
+  }
+
+  // ==========================================
+  // 1. TERMINAL FAILURE LISTENER
+  // ==========================================
+  const terminalListener = vscode.window.onDidEndTerminalShellExecution(
+	(event) => {
+	  const config = vscode.workspace.getConfiguration("errorSounds");
+	  const chosenSound = config.get("terminalSoundChoice");
+
+	  // Play the sound if the command failed AND the user didn't pick "none"
+	  if (
+		chosenSound !== "none" &&
+		event.exitCode !== undefined &&
+		event.exitCode !== 0
+	  ) {
+		playSound(chosenSound);
+	  }
+	},
+  );
+
+  // ==========================================
+  // 2. IDE DIAGNOSTICS (SYNTAX ERROR) LISTENER
+  // ==========================================
+  let lastSoundTime = 0;
+  const COOLDOWN_MS = 5000; // 5-second anti-spam delay
+
+  const diagnosticsListener = vscode.languages.onDidChangeDiagnostics(
+	(event) => {
+	  const config = vscode.workspace.getConfiguration("errorSounds");
+	  const chosenSound = config.get("ideSoundChoice");
+
+	  if (chosenSound === "none") return;
+
+	  const now = Date.now();
+	  // Prevent spamming the sound if errors occur back-to-back
+	  if (now - lastSoundTime < COOLDOWN_MS) return;
+
+	  let hasNewErrors = false;
+
+	  // Loop through the files that VS Code just checked
+	  for (const uri of event.uris) {
+		const diagnostics = vscode.languages.getDiagnostics(uri);
+		// Filter to only look at severe ERRORS (ignore warnings/info)
+		const errors = diagnostics.filter(
+		  (d) => d.severity === vscode.DiagnosticSeverity.Error,
+		);
+
+		if (errors.length > 0) {
+		  hasNewErrors = true;
+		  break; // Stop looking once we find at least one error
+		}
+	  }
+
+	  if (hasNewErrors) {
+		playSound(chosenSound);
+		lastSoundTime = now; // Reset the cooldown timer
+	  }
+	},
+  );
+
+  // Register listeners so VS Code can clean them up if the extension is disabled
+  context.subscriptions.push(terminalListener, diagnosticsListener);
 }
 
-// This method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
-}
+  activate,
+  deactivate,
+};

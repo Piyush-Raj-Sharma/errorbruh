@@ -27,24 +27,51 @@
     "eslint": "^9.39.3"
   },
   "dependencies": {
-    "play-sound": "^1.1.6"
+    "play-sound": "^1.1.6",
+    "sound-play": "^1.1.0"
   },
-  "contributes":{
-    "configuration":{
+  "contributes": {
+    "configuration": {
       "title": "Error Sounds",
       "properties": {
         "errorSounds.terminalSoundChoice": {
           "type": "string",
-          "enum": ["fahhhhhhhhhhhhhh.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
-          "enumDescriptions": ["Faaah the tredny one", "amitabbachaaan", "ias ki taiyaari chor do", "Mute Terminal Sound"],
-          "default": "fahhhhhhhhhhhhhh.mp3",
+          "enum": [
+            "fahhhhhhhhhhhhhh.wav",
+            "Voicy_Hey Ma Mataji.mp3",
+            "Voicy_Jetha Nonsense.mp3",
+            "maa-ka-bhosda-aag-made-with-Voicemod.mp3",
+            "none"
+          ],
+          "enumDescriptions": [
+            "FAAAH — emotional damage detected",
+            "Hey Maa Mataji — pray for your code",
+            "Nonsense! — compiler lost respect for you",
+            "Rage scream — keyboard smashing moment",
+            "None — no sound, only depression"
+          ],
+          "default": "fahhhhhhhhhhhhhh.wav",
           "description": "Choose the sound to play in the terminal when an error occurs."
         },
         "errorSounds.ideSoundChoice": {
           "type": "string",
-          "enum": ["fahhhhhhhhhhhhhh.mp3", "aaag.mp3", "tumIASki.mp3", "none"],
-          "enumDescriptions": ["Faaah the tredny one", "amitabbachaaan", "ias ki taiyaari chor do", "Mute Debug Sound"],
-          "default": "fahhhhhhhhhhhhhh.mp3",
+          "enum": [
+            "fahhhhhhhhhhhhhh.wav",
+            "Voicy_Hey Ma Mataji.mp3",
+            "Voicy_Jetha Nonsense.mp3",
+            "Voicy_Padhaai Likhaai me dhyan do.mp3",
+            "Voicy_Haan maloom hai tere baap ko mat sikha chal.mp3",
+            "none"
+          ],
+          "enumDescriptions": [
+            "FAAAH 😱 Critical emotional damage",
+            "Hey Maa Mataji 🙏 God cannot save this code",
+            "Nonsense! 🤦 Compiler disappointed in you",
+            "Padhaai likhaai me dhyan do 📚 Skill issue detected",
+            "Mat sikha chal 😤 Compiler got offended",
+            "Silent mode 🤫 Suffer quietly"
+          ],
+          "default": "Voicy_Hey Ma Mataji.mp3",
           "description": "Choose the sound to play in the debug console when an error occurs."
         }
       }
