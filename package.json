@@ -4,13 +4,13 @@
   "description": "ErrorBruh makes your coding experience more emotional and hilarious by playing meme-worthy sounds whenever your code fails, crashes, or throws errors. Turn boring error messages into entertaining moments with iconic reactions like the viral FAAH sound.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.93.0"
+    "vscode": "^1.109.0"
   },
   "categories": [
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./extension.js",
   "scripts": {
@@ -29,6 +29,10 @@
   "dependencies": {
     "play-sound": "^1.1.6",
     "sound-play": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Piyush-Raj-Sharma/errorbruh.git"
   },
   "contributes": {
     "configuration": {
