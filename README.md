@@ -20,8 +20,6 @@ Turn your coding pain into comedy.
 ## 🔥 Available Sounds
 
 - **FAAAH 😱** — Viral emotional damage scream  
-- **Hey Maa Mataji 🙏** — Divine reaction to broken code  
-- **Jetha Nonsense 🤦** — Compiler disappointed in you  
 - **Padhaai likhaai me dhyan do 📚** — Skill issue detected  
 - **Mat sikha chal 😤** — Compiler got offended  
 - **Silent mode 🤫** — Suffer quietly  

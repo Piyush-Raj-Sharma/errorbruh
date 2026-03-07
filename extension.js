@@ -13,8 +13,10 @@ function activate(context) {
   function playSound(audioFileName) {
 	if (!audioFileName || audioFileName === "none") return;
 
+	const fullFileName = audioFileName + ".mp3";
+
 	// Build the absolute path to the sound file in your 'sounds' folder
-	const soundPath = path.join(context.extensionPath, "sounds", audioFileName);
+	const soundPath = path.join(context.extensionPath, "sounds", fullFileName);
 
 	console.log("TRYING TO PLAY SOUND AT PATH:", soundPath);
 
